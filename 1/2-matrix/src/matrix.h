@@ -6,7 +6,10 @@ class Matrix
 {
 public:
     Matrix();
+
     bool operator==(const Matrix&) const;
+    Matrix operator*(const Matrix&) const;
+
     int get(const unsigned& i, const unsigned& j) const;
     bool set(const unsigned& i, const unsigned& j, const int& val);
 private:

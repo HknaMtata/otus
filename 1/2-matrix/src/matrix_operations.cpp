@@ -3,19 +3,20 @@
 #include <thread>
 #include <vector>
 
-MulOp::MulOp(const Matrix& A1, const Matrix& A2, Matrix& B)
+MulOp::MulOp(const Matrix& A1, const Matrix& A2)
     : m_i(0)
     , m_j(0)
     , m_A1(A1)
     , m_A2(A2)
-    , m_B(B)
 {
 }
 
-void MulOp::calculate()
+Matrix MulOp::calculate()
 {
-    auto f = [this](){
-        while(iteration()) {}
+    Matrix m_B;
+
+    auto f = [this, &m_B](){
+        while(iteration(m_B)) {}
     };
 
     const unsigned threadsCount = 4;
@@ -23,21 +24,18 @@ void MulOp::calculate()
     for (unsigned i = 0; i < threadsCount; i++)
         threads.push_back(std::thread(f));
 
-    for (auto& th : threads) {
-        try {
-            th.join();
-        } catch (const std::system_error &ex) {
-            std::cout << ex.what() << std::endl;
-        }
-    }
+    for (auto& th : threads)
+        th.join();
+
+    return m_B;
 }
 
-bool MulOp::iteration()
+bool MulOp::iteration(Matrix& m_B)
 {
     unsigned i = 0, j = 0;
     if(!forwardIndex(i, j))
         return false;
-    calculate(i, j);
+    calculate(i, j, m_B);
     return true;
 }
 
@@ -52,7 +50,7 @@ bool MulOp::forwardIndex(unsigned& i, unsigned& j)
     return true;
 }
 
-void MulOp::calculate(const unsigned& i, const unsigned& j)
+void MulOp::calculate(const unsigned& i, const unsigned& j, Matrix& m_B)
 {
     int res = 0;
     for(unsigned k = 0; k < dims; ++k)
