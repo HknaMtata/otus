@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/1-2-matrix.dir/tests/main.cpp.o CMakeFiles/1-2-matrix.dir/tests/test.cpp.o  -o ../../build/bin/1-2-matrix  ../../build/lib/libmatrix.a ../../lib/libgtest.a -lpthread 
