@@ -6,6 +6,6 @@ add_library(
     ${PROJECT_NAME} matrix.cpp matrix_utils.cpp matrix_operations.cpp
 )
 
-target_include_directories(
-    ${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}
-)
+# target_include_directories(
+#     ${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}
+# )
