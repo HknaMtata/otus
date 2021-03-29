@@ -42,10 +42,10 @@ bool MulOp::iteration(Matrix& m_B)
 bool MulOp::forwardIndex(unsigned& i, unsigned& j)
 {
     const std::lock_guard<std::mutex> lock(m_mutex);
-    if(m_i == (dims) && m_j == (dims))
+    if(m_i == dims && m_j == dims)
         return false;
     i = m_i, j = m_j;
-    if(++m_j == dims)
+    if(++m_j == (dims - 1))
         ++m_i, m_j = 0;
     return true;
 }

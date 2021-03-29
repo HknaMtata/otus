@@ -3,9 +3,13 @@ project(matrix)
 
 # Add a library with the above sources
 add_library(
-    ${PROJECT_NAME} matrix.cpp matrix_utils.cpp matrix_operations.cpp
+    ${PROJECT_NAME}
+    main.cpp
+    matrix.cpp
+    matrix_utils.cpp
+    matrix_operations.cpp
 )
 
-# target_include_directories(
-#     ${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}
-# )
+target_include_directories(
+    ${PROJECT_NAME} PUBLIC ./
+)

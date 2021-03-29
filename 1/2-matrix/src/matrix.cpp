@@ -4,7 +4,9 @@
 
 Matrix::Matrix()
 {
-    memset(m_matrix, 0, sizeof(m_matrix));
+    for(unsigned i = 0; i < dims; i++)
+        for(unsigned j = 0; j < dims; j++)
+            set(i, j, 0);
 }
 
 bool Matrix::operator==(const Matrix& other) const
